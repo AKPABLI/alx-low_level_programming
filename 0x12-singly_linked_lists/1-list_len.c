@@ -1,36 +1,21 @@
-#include <stdio.h>
+#include "lists.h"
 
-#include <time.h>
-
-#include <stdlib.h>
 /**
- * main - main block
- * Description: Get a random number and print the number
- * positive,nagetive or zero
- * Return: Always 0 (success)
+ * list_len - finds the number of elements in a linked list
+ *@h: pointer to the list
+ *
+ *Return: the number of elements
  */
-int main(void)
-{
-	int n;
-	int last;
 
-	srand(time(0));
-	n = rand() - RAND_MAX / 2;
-	last = n % 10;
-
-	if (last == 0)
+size_t list_len(const list_t *h)
 	{
-		printf("Last digit of %d is %d and is 0\n", n, last);
+		size_t elements = 0;
+
+		while (h)
+		{
+			elements++;
+			h = h->next;
+		}
+
+		return (elements);
 	}
-	else
-	{
-		if (last > 5)
-		{
-			printf("Last digit of %d is %d and is greater than 5\n", n, last);
-		}
-		else if (last < 6)
-		{
-			printf("Last digit of %d is %d and is less than 6 and not 0\n", n, last);
-		}
-	}	return (0);
-}
