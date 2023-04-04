@@ -9,14 +9,12 @@
  */
 listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
-	/*integrs with wiith only positive values*/
-	unsigned int x;
-	/* applying forloop */
-	for (x = 0; x < index && head != NULL; x++)
+	unsigned int i;
+
+	for (i = 0; i < index && head != NULL; i++)
 	{
 		head = head->next;
 	}
 
 	return (head);
 }
-return (head);
