@@ -1,51 +1,36 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /**
- * insert_nodeint_at_index - inserts a new node
- * at a given position.
- * @head: head of a list.
- * @idx: index of the list where the new node is
- * added.
- * @n: integer element.
+ * delete_nodeint_at_index - func that deletes the node at index
+ * @head: double head pointer
+ * @index: index node
  *
- * Return: the address of the new node, or NULL if it
- * failed.
+ * Return: index node pointer
  */
-listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
+int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
-	unsigned int i;
-	listint_t *new;
-	listint_t *h;
+	unsigned int n;
+	listint_t *temp, *next;
 
-	h = *head;
-
-	if (idx != 0)
+	if (head == NULL || *head == NULL)
+		return (-1);
+	if (index == 0)
 	{
-		for (i = 0; i < idx - 1 && h != NULL; i++)
-		{
-			h = h->next;
-		}
+		next = (*head)->next;
+		free(*head);
+		*head = next;
+		return (1);
 	}
-
-	if (h == NULL && idx != 0)
-		return (NULL);
-
-	new = malloc(sizeof(listint_t));
-	if (new == NULL)
-		return (NULL);
-
-	new->n = n;
-
-	if (idx == 0)
+	temp = *head;
+	for (n = 0; n < index - 1; n++)
 	{
-		new->next = *head;
-		*head = new;
+		if (temp->next == NULL)
+			return (-1);
+		temp = temp->next;
 	}
-	else
-	{
-		new->next = h->next;
-		h->next = new;
-	}
-
-	return (new);
+	next = temp->next;
+	temp->next = next->next;
+	free(next);
+	return (1);
 }
