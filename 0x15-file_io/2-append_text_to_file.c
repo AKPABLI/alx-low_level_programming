@@ -10,30 +10,30 @@
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int i;
-	int x_letters;
-	int Wr;
+	int fd;
+	int nletters;
+	int rwr;
 
 	if (!filename)
 		return (-1);
 
-	i = open(filename, O_WRONLY | O_APPEND);
+	fd = open(filename, O_WRONLY | O_APPEND);
 
-	if (i== -1)
+	if (fd == -1)
 		return (-1);
 
 	if (text_content)
 	{
-		for (x_letters = 0; text_content[x_letters]; x_letters++)
+		for (nletters = 0; text_content[nletters]; nletters++)
 			;
 
-		Wr = write(i, text_content, x__letters);
+		rwr = write(fd, text_content, nletters);
 
-		if (Wr == -1)
+		if (rwr == -1)
 			return (-1);
 	}
 
-	close(I);
+	close(fd);
 
 	return (1);
 }
