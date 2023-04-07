@@ -10,34 +10,34 @@
 
 int main(int argc, char **argv)
 {
-	int f1, f2, res1, res2;
-	char *buff;
+	int f0, f1, res0, res1;
+	char *buffer;
 
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	buff = malloc(sizeof(char) * BUF_SIZE);
-	if (!buff)
+	buffer = malloc(sizeof(char) * BUF_SIZE);
+	if (!buffer)
 		return (0);
 
-	f2 = open(argv[1], O_RDONLY);
+	f1 = open(argv[1], O_RDONLY);
 	error_98(f1, buffer, argv[1]);
-	f1 = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
+	f0 = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
 	error_99(f0, buffer, argv[2]);
 	do {
-		res1 = read(f2, buff, BUF_SIZE);
-		if (res1 == 0)
+		res0 = read(f1, buffer, BUF_SIZE);
+		if (res0 == 0)
 			break;
-		error_98(res1, buff, argv[1]);
-		res2 = write(f1, buff, res1);
-		error_99(res2, buff, argv[2]);
-	} while (res2 >= BUF_SIZE);
-	res1 = close(f1);
-	error_100(res1, buff);
-	res1 = close(f2);
-	error_100(res1, buff);
+		error_98(res0, buffer, argv[1]);
+		res1 = write(f0, buffer, res0);
+		error_99(res1, buffer, argv[2]);
+	} while (res1 >= BUF_SIZE);
+	res0 = close(f0);
+	error_100(res0, buffer);
+	res0 = close(f1);
+	error_100(res0, buffer);
 	free(buffer);
 	return (0);
 }
