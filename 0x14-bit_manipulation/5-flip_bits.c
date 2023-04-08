@@ -9,39 +9,13 @@ unsigned int get_length(unsigned long int num);
  */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned int i, count, len1, len2, total_len;
-	int b1, b2;
+	unsigned long int xor = n ^ m, bits = 0;
 
-	len1 = get_len(n);
-	len2 = get_len(m);
-	total_len = (len1 > len2) ? len1 : len2;
-
-	count = 0;
-	for (x = 0; x < total_len; i++)
+	while (xor > 0)
 	{
-		b1 = n & 1;
-		b2 = m & 1;
-		if (b1 != b2)
-			count++;
-		n >>= 1;
-		m >>= 1;
+		bits += (xor & 1);
+		xor >>= 1;
 	}
-	return (count);
-}
 
-/**
- * get_length - returns the number of bits in a number
- * @num: number to consider
- *
- * Return: length of number
- */
-unsigned int get_length(unsigned long int num)
-{
-	unsigned int count;
-
-	if (num == 0)
-		return (1);
-	for (count = 0; num != 0; count++)
-		num >>= 1;
-	return (count);
+	return (bits);
 }
